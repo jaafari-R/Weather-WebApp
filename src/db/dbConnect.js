@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const config =  require("../config")
 
-function connectMongoDb() {
+function connectMongoDB() {
     return mongoose.connect(config.DB_URL);
 }
 
+function disconnectMongoDB() {
+    return mongoose.connection.close();
+}
+
 module.exports = {
-    connectDB: connectMongoDb
+    connectDB: connectMongoDB,
+    disconnectDB: disconnectMongoDB
 };
