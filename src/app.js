@@ -5,6 +5,9 @@ const WeatherRouter = require("./routes/weatherRouter");
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(express.static(__dirname + "/../public"));
+app.use(express.static(__dirname + "/../node_modules/jquery/dist"));
 app.use("/weather", WeatherRouter);
 
 async function main() {

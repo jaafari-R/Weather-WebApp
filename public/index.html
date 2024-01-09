@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="container">
+        <form action="">
+            <input id="getWeatherInput" type="text">
+            <button id="getWeather">Get Weather</button>
+        </form>
+        <div id="cityWeathers">
+        </div>
+    </div>
+
+    <script id="cityWeathers-template" type="text/x-handlebars-template">
+        <div class="cityWeather">
+
+            <h3>{{name}}</h3>
+            <h4>{{temperature}}</h4>
+            <p>{{condition}}</p>
+            <img src={{conditionIcon}}>
+            <button class="saveWeather" data-cityName={{name}}>Save</button>
+            <button class="unSaveWeather" data-cityName={{name}}>unSave</button>
+        </div>
+    </script>
+
+    <script src="jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
+    <script src="configs.js"></script>
+    <script src="weatherApiManager.js"></script>
+    <script src="weatherManager.js"></script>
+    <script src="renderer.js"></script>
+    <script src="weatherController.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,21 +1,25 @@
 class WeatherManager {
     constructor() {
         this.cityWeathers = [];
-        this.init();
     }
     
     async init() {
         this.cityWeathers = await WeatherApiManager.getSavedCityWeathers();
+        console.log(this.cityWeathers)
     }
 
     async getCityWeather(cityName) {
+        if(this.cityWeathers.find(cw => cw.name === cityName))
+            return;
         const cityWeather = await WeatherApiManager.getCityWeather(cityName);
         this.cityWeathers.push(cityWeather);
+        console.log(this.cityWeathers);
         return cityWeather;
     }
 
-    async saveCityWeather(name, tempreture, condition, conditionIcon) {
-        const savedCityWeather = await WeatherApiManager.saveCityWeather({name, tempreture, condition, conditionIcon});
+    async saveCityWeather(cityName) {
+        const cityWeather = this.cityWeathers.find(cw => cw.name === cityName);
+        const savedCityWeather = await WeatherApiManager.saveCityWeather(cityWeather);
         return savedCityWeather;
     }
 

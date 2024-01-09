@@ -11,9 +11,9 @@ class WeatherApiManager {
         return $.post("/weather", cityWeather);
     }
 
-    static deleteCityWeather() {
+    static deleteCityWeather(cityName) {
         return $.ajax({
-            url: "/weather",
+            url: "/weather/"+cityName,
             type: "DELETE"
         })
     }
