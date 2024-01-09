@@ -9,8 +9,10 @@ class WeatherManager {
     }
 
     async getCityWeather(cityName) {
-        if(this.cityWeathers.find(cw => cw.name === cityName))
+        if(this.cityWeathers.find(cw => cw.name.toLowerCase() === cityName.toLowerCase())) {
             return;
+        }
+        
         const cityWeather = await WeatherApiManager.getCityWeather(cityName);
         this.cityWeathers.push(cityWeather);
         console.log(this.cityWeathers);

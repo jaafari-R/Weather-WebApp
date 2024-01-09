@@ -16,7 +16,9 @@ class WeatherController {
 
     async getCityWeather(cityName) {
         const cityWeather = await this.weatherManager.getCityWeather(cityName);
-        this.renderer.addCityWeather(cityWeather);
+        if(cityWeather) {
+            this.renderer.addCityWeather(cityWeather);
+        }
     }
 
     async saveCityWeather(cityName) {
