@@ -38,7 +38,7 @@ class WeatherController {
         try {
             const cityName = req.params.cityName;
             await WeatherModel.deleteSavedCityWeather(cityName);
-            res.send(204);
+            res.sendStatus(204);
         }
         catch(error) {
             errorHandler.handle(res, error);

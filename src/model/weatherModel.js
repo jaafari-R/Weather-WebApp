@@ -33,13 +33,11 @@ class WeatherModel {
     }
 
     static async deleteSavedCityWeather(name) {
-        try {
-            return await CityWeatherModel.deleteOne({name});
-        }
-        catch(error) {
-            console.log(error);
+        const result = await CityWeatherModel.deleteOne({name});
+        if(result.deletedCount === 0) {
             throw new CITY_DOES_NOT_EXIST_ERR();
         }
+        return result;
     }
 }
 

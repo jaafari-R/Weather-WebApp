@@ -14,7 +14,7 @@ class CITY_WEATHER_IS_NOT_SAVED_ERR extends Error { // does not exist in db
 }
 
 class CITY_DOES_NOT_EXIST_ERR extends Error {
-    static msg = "This city does not exist";
+    static msg = "This city is not saved";
     static statusCode = 400;
 }
 

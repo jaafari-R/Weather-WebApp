@@ -5,7 +5,6 @@ class WeatherManager {
     
     async init() {
         this.cityWeathers = await WeatherApiManager.getSavedCityWeathers();
-        console.log(this.cityWeathers)
     }
 
     async getCityWeather(cityName) {
@@ -15,7 +14,6 @@ class WeatherManager {
 
         const cityWeather = await WeatherApiManager.getCityWeather(cityName);
         this.cityWeathers.push(cityWeather);
-        console.log(this.cityWeathers);
         return cityWeather;
     }
 
@@ -25,11 +23,10 @@ class WeatherManager {
         return savedCityWeather;
     }
 
-    async deleteCityWeather(cityName) {
+    async unsaveCityWeather(cityName) {
         const cityWeatherIdx = this.cityWeathers.findIndex(cw => cw.name === cityName);
         if(cityWeatherIdx > -1) {
             await WeatherApiManager.deleteCityWeather(cityName);
-            this.cityWeathers.splice(cityWeatherIdx, 1);
         }
     }
 

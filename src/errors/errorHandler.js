@@ -10,7 +10,6 @@ class ErrorHandler {
         this.errors = {
             ...weatherErrors
         };
-        console.log(this.errors)
     }
 
     handle(res, error) {
