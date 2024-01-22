@@ -12,7 +12,7 @@ class WeatherManager {
         if(this.cityWeathers.find(cw => cw.name.toLowerCase() === cityName.toLowerCase())) {
             return;
         }
-        
+
         const cityWeather = await WeatherApiManager.getCityWeather(cityName);
         this.cityWeathers.push(cityWeather);
         console.log(this.cityWeathers);
@@ -25,11 +25,19 @@ class WeatherManager {
         return savedCityWeather;
     }
 
-    async deleteCityWeather(name) {
-        const cityWeatherIdx = this.cityWeathers.findIndex(cw => cw.name === name);
+    async deleteCityWeather(cityName) {
+        const cityWeatherIdx = this.cityWeathers.findIndex(cw => cw.name === cityName);
         if(cityWeatherIdx > -1) {
-            await WeatherApiManager.deleteCityWeather(name);
+            await WeatherApiManager.deleteCityWeather(cityName);
             this.cityWeathers.splice(cityWeatherIdx, 1);
         }
+    }
+
+    async removeCityWeather(cityName) {
+        const cityWeatherIdx = this.cityWeathers.findIndex(cw => cw.name === cityName);
+        if(cityWeatherIdx === -1)
+            return;
+        this.cityWeathers.splice(cityWeatherIdx, 1); 
+        // TODO add delete if saved in db
     }
 }

@@ -1,27 +1,48 @@
 const WeatherModel = require("../model/weatherModel");
+const errorHandler = require("../errors/errorHandler")
 
 class WeatherController {
     static async getWeatherByCityName(req, res) {
-        const cityName = req.params.cityName;
-        const cityWeather = await WeatherModel.getCityWeather(cityName);
-        res.send(cityWeather);
+        try {
+            const cityName = req.params.cityName;
+            const cityWeather = await WeatherModel.getCityWeather(cityName);
+            res.send(cityWeather);
+        }
+        catch(error) {
+            errorHandler.handle(res, error);
+        }
     }
 
     static async getAllSavedCityWeathers(req, res) {
-        const cityWeathers = await WeatherModel.getSavedCityWeathers();
-        res.send(cityWeathers);
+        try {
+            const cityWeathers = await WeatherModel.getSavedCityWeathers();
+            res.send(cityWeathers);
+        }
+        catch(error) {
+            errorHandler.handle(res, error);
+        }
     }
 
     static async saveCityWeather(req, res) {
-        const cityWeather = req.body;
-        const newCityWeather = await WeatherModel.saveCityWeather(cityWeather);
-        res.send(newCityWeather)
+        try {
+            const cityWeather = req.body;
+            const newCityWeather = await WeatherModel.saveCityWeather(cityWeather);
+            res.send(newCityWeather)
+        }
+        catch(error) {
+            errorHandler.handle(res, error);
+        }
     }
 
     static async deleteCityWeather(req, res) {
-        const cityName = req.params.cityName;
-        await WeatherModel.deleteSavedCityWeather(cityName);
-        res.send(204);
+        try {
+            const cityName = req.params.cityName;
+            await WeatherModel.deleteSavedCityWeather(cityName);
+            res.send(204);
+        }
+        catch(error) {
+            errorHandler.handle(res, error);
+        }
     }
 }
 

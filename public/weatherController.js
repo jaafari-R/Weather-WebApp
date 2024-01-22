@@ -21,7 +21,7 @@ class WeatherController {
         }
     }
 
-    async saveCityWeather(cityName) {
+    saveCityWeather(cityName) {
         try {
             this.weatherManager.saveCityWeather(cityName);
         }
@@ -30,12 +30,21 @@ class WeatherController {
         }
     }
 
-    async unsaveCityWeather(cityName) {
+    unsaveCityWeather(cityName) {
         try {
-            this.weatherManager.deleteCityWeather(cityName);
+            this.weatherManager.unsaveCityWeather(cityName);
         }
         catch(err) {
             console.log(err);
+        }
+    }
+
+    removeCityWeather(cityName) {
+        try {
+            this.weatherManager.removeCityWeather(cityName);
+        }
+        catch(err) {
+            console.log(err)
         }
     }
 
@@ -53,12 +62,22 @@ class WeatherController {
             controller.getCityWeather(cityName);
         })
 
-        cityWeathers.on("click", ".saveWeather", async function() {
-            await controller.saveCityWeather($(this).data("cityname"));
+        cityWeathers.on("click", ".saveWeather", function() {
+            controller.saveCityWeather($(this).data("cityname"));
         })
 
-        cityWeathers.on("click", ".unSaveWeather", async function() {
-            await controller.unsaveCityWeather($(this).data("cityname"));
+        cityWeathers.on("click", ".unSaveWeather", function() {
+            controller.unsaveCityWeather($(this).data("cityname"));
+        })
+
+        cityWeathers.on("click", ".removeWeather", async function() {
+            try {
+                controller.removeCityWeather($(this).data("cityname"));
+                this.closest(".cityWeather").remove();
+            }
+            catch(error) {
+                console.log(err)
+            }
         })
     }
 }
